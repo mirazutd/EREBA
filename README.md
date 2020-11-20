@@ -1,9 +1,9 @@
 # EREBA
 
-We have used Python 3.6 to run the files. Pytorch has been used to create and exectute the models. Other libraries Needed: Pytorch, tqdm, numpy, pandas.
+We have used Python 3.6 to run the files. Pytorch has been used to create and exectute the models. Other libraries Needed: tqdm, numpy, pandas.
 
 
-We have already put the trained estimator model weights in the directory. To create test inputs, following commands are needed to be executed for three different AdNNs. mode1 is used for input-based test generation and mode2 for universal test generation.
+We have already put the trained estimator model weights in the directory. To create test inputs, following commands are needed to be executed for three different AdNNs. mode1 is used for input-based test generation and mode2 for universal test generation (DDNN represents BranchyNet).
 
 
 ```

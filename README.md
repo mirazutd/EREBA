@@ -4,3 +4,10 @@ We have used Python 3.6 to run the files. Pytorch has been used to create and ex
 
 
 We have already put the trained estimator model weights in the directory. 
+
+
+
+'''
+python blockdrop_attack.py mode1
+
+'''

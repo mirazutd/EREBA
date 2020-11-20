@@ -8,7 +8,7 @@ import math
 from torch.autograd import Variable
 import torch.autograd as autograd
 
-
+##
 def conv3x3(in_planes, out_planes, stride=1):
     "3x3 convolution with padding"
     return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride,
@@ -725,17 +725,27 @@ class ResNetRecurrentGateSP(nn.Module):
             for i in range(0 + int(g == 0), self.num_layers[g]):
                 if getattr(self, 'group{}_ds{}'.format(g+1, i)) is not None:
                     prev = getattr(self, 'group{}_ds{}'.format(g+1, i))(prev)
+                    #print("in")
                 #print(mask.tolist()[0][0][0][0])
                 #temp=masks[len(masks)-1]
                 #print(temp)
-                x = getattr(self, 'group{}_layer{}'.format(g + 1, i))
-                '''if(mask.tolist()[0][0][0][0]==1.0):
-                    #cnt+=1
-                    x = getattr(self, 'group{}_layer{}'.format(g+1, i))(x)'''
+                if(mask.tolist()[0][0][0][0]==1.0):
+
+                    x = getattr(self, 'group{}_layer{}'.format(g+1, i))(x)
+
+
+                prev = x = mask.expand_as(x) * x \
+                               + (1 - mask).expand_as(prev) * prev
 
                 # new mask is taking the current output
-                prev = x = mask.expand_as(x) * x \
-                           + (1 - mask).expand_as(prev) * prev
+                #prev=prev.view(-1, 1)
+                '''print("prev ", prev.size())
+                print("x ", x.size())
+                print("mask ", mask.size())
+
+                prev=prev.reshape(x.size())'''
+
+
                 gate_feature = getattr(self, 'group{}_gate{}'.format(g+1, i))(x)
                 mask, gprob = self.control(gate_feature)
                 #print(mask)

@@ -17,7 +17,7 @@ from models import base
 import argparse
 import models_skip as models
 from training_model import FlatResNet32
-
+import pickle
 
 def parse_args():
     parser = argparse.ArgumentParser(description='PyTorch SkipNet Attack')

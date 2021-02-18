@@ -1,6 +1,6 @@
 import torch.nn as nn
 import math
-from tx2_predict import PowerLogger,getNodes
+#from tx2_predict import PowerLogger,getNodes
 import torch
 import torchvision.models as torchmodels
 import re
@@ -14,7 +14,7 @@ from torch.nn import init, Parameter
 import copy
 import csv
 
-from models import base
+from model import base
 import utils
 
 #--------------------------------------------------------------------------------------------------#

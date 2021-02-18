@@ -87,7 +87,7 @@ def load_checkpoint(rnet, agent, load):
     if load=='nil':
         return None
 
-    checkpoint = torch.load(load)
+    checkpoint = torch.load(load,map_location=torch.device('cpu'))
     if 'resnet' in checkpoint:
         rnet.load_state_dict(checkpoint['resnet'])
         print ('loaded resnet from', os.path.basename(load))
@@ -161,11 +161,11 @@ def get_dataset(model, root='data/'):
         trainset = torchdata.CIFAR10(root=root, train=True, download=True, transform=transform_train)
         testset = torchdata.CIFAR10(root=root, train=False, download=True, transform=transform_test)
     elif dset=='C100':
-        trainset = torchdata.CIFAR100(root=root, train=True, download=True, transform=transform_train)
+        #trainset = torchdata.CIFAR100(root=root, train=True, download=True, transform=transform_train)
         testset = torchdata.CIFAR100(root=root, train=False, download=True, transform=transform_test)
     elif dset=='ImgNet':
         #trainset = torchdata.ImageFolder(root+'/train/', transform_train)
-        testset = torchdata.ImageFolder('/home/mxh170530/val/', transform_test)
+        testset = torchdata.ImageFolder(root+'/val/', transform_test)
 
     #return testset
     return trainset, testset
@@ -206,7 +206,7 @@ def get_model(model):
         agent = resnet.Policy224([1,1,1,1], num_blocks=33)
 
     # load pretrained weights into flat ResNet
-    rnet_checkpoint = torch.load(rnet_checkpoint)
+    rnet_checkpoint = torch.load(rnet_checkpoint,map_location=torch.device('cpu'))
     load_weights_to_flatresnet(rnet_checkpoint, rnet)
 
     return rnet, agent

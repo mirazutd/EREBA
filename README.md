@@ -11,10 +11,6 @@ python blockdrop_attack.py mode1
 
 ```
 ```
-python skipnet_attack.py mode1
-
-```
-```
 python ddnn_attack.py mode1
 
 ```
